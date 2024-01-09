@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {Cards, Deck} from "../../services/types";
-import {useDrawInitialCardsFromDeckQuery, useGetNewDeckQuery} from "../../services/cards";
+import {Card, Cards, Deck} from "../../services/types";
+import {useDrawCardFromDeckQuery, useDrawInitialCardsFromDeckQuery, useGetNewDeckQuery} from "../../services/cards";
 
 
 export const useCardDeck = () => {
@@ -37,4 +37,18 @@ export const useInitialCards = (deckId: string) => {
         dealerHand: dealerHand,
         playerHand: playerHand
     };
+}
+
+export const useDrawCard = (deckId: string) => {
+    const [card, setCard] = useState<Card>();
+
+    const { data, error, isLoading } = useDrawCardFromDeckQuery(deckId);
+
+    useEffect(() => {
+        if (!error && !isLoading) {
+            setCard(data);
+        }
+    }, [data, error, isLoading]);
+
+    return {...card};
 }

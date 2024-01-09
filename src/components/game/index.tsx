@@ -14,13 +14,19 @@ export const Game = () => {
 
     const wagerAmounts: number[] = [5, 10, 25, 50, 100];
 
+    const handleHit = (amount: number) => {
+        setWager(wager + amount);
+        setMoneyAmount(moneyAmount - amount);
+    };
+
     return deck_id ? (
         <Box textAlign={'center'} justifyContent={'center'} display={'flex'} flexDirection={'column'}>
             <Hand deck_id={deck_id} cards={dealerHand} />
             <Stack textAlign={'center'} justifyContent={'center'} display={'flex'} flexDirection={'row'}>
-                {wagerAmounts.map((amount) => <Button onClick={() => setWager(wager + amount)}>${amount}</Button>)}
+                {wagerAmounts.map((amount) => <Button onClick={() => handleHit(amount)}>${amount}</Button>)}
             </Stack>
-            <Typography>{wager}</Typography>
+            <Typography>Bet: {wager}</Typography>
+            <Typography>Money: {moneyAmount}</Typography>
             <Stack textAlign={'center'} justifyContent={'center'} display={'flex'} flexDirection={'row'}>
                 <Button>Hit</Button>
                 <Button>Stand</Button>

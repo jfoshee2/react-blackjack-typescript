@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {BASE_URL} from "./constants";
-import {Cards, Deck} from "./types";
+import {Card, Cards, Deck} from "./types";
 
 
 export const deckOfCardsApi = createApi({
@@ -13,7 +13,7 @@ export const deckOfCardsApi = createApi({
         drawInitialCardsFromDeck: build.query<Cards, string>({
             query: (param) => `${param}/draw/?count=4`,
         }),
-        drawCardFromDeck: build.query<Cards, string>({
+        drawCardFromDeck: build.query<Card, string>({
             query: (param) => `${param}/draw/?count=1`,
         }),
     }),
